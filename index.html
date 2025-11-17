@@ -1,88 +1,391 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Micheal Machine Learning Engineer</title>
-    <link rel="stylesheet" href="./assets/css/bootstrap.min.css">
-    <link rel="stylesheet" href="./assets/css/aos.css">
-    <link rel="stylesheet" href="./assets/css/line-awesome.min.css">
-    <link rel="stylesheet" href="./assets/css/style.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://maxst.icons8.com/vue-static/landings/line-awesome/line-awesome/1.3.0/css/line-awesome.min.css">
+    <style>
+        :root {
+            --color-brand: #00d4ff;
+            --color-base: #1a1a2e;
+            --color-body: #0f0f1e;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: var(--color-body);
+            color: #fff;
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        /* Navbar Styles */
+        .navbar-horizontal {
+            background: rgba(0, 0, 0, 0.95);
+            backdrop-filter: blur(10px);
+            padding: 1rem 0;
+            box-shadow: 0 2px 20px rgba(0, 212, 255, 0.1);
+            z-index: 1000;
+        }
+        
+        .navbar-horizontal .navbar-brand img {
+            width: 50px;
+            height: 50px;
+            object-fit: cover;
+            border: 2px solid var(--color-brand);
+        }
+        
+        .navbar-horizontal .nav-link {
+            padding: 0.5rem 1rem;
+            transition: all 0.3s ease;
+            color: rgba(255, 255, 255, 0.8) !important;
+            font-weight: 500;
+            cursor: pointer;
+        }
+        
+        .navbar-horizontal .nav-link:hover,
+        .navbar-horizontal .nav-link.active {
+            color: var(--color-brand) !important;
+            transform: translateY(-2px);
+        }
+
+        .navbar-toggler {
+            border-color: var(--color-brand);
+        }
+
+        .navbar-toggler-icon {
+            background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 30 30'%3e%3cpath stroke='%2300d4ff' stroke-linecap='round' stroke-miterlimit='10' stroke-width='2' d='M4 7h22M4 15h22M4 23h22'/%3e%3c/svg%3e");
+        }
+
+        /* Page Sections - Full Screen */
+        .page-section {
+            display: none;
+            min-height: 100vh;
+            padding-top: 100px;
+            padding-bottom: 60px;
+            opacity: 0;
+            transition: opacity 0.5s ease-in-out;
+        }
+
+        .page-section.active {
+            display: block;
+            opacity: 1;
+            animation: fadeIn 0.5s ease-in-out;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .text-brand {
+            color: var(--color-brand) !important;
+        }
+
+        .btn-brand {
+            background: var(--color-brand);
+            color: #000;
+            font-weight: 600;
+            padding: 0.75rem 1.5rem;
+            border: none;
+            transition: all 0.3s ease;
+        }
+
+        .btn-brand:hover {
+            background: #00b8e6;
+            transform: translateY(-2px);
+            box-shadow: 0 5px 20px rgba(0, 212, 255, 0.4);
+        }
+
+        .btn-outline-light {
+            border: 2px solid #fff;
+            color: #fff;
+            padding: 0.5rem 1rem;
+            transition: all 0.3s ease;
+        }
+
+        .btn-outline-light:hover {
+            background: #fff;
+            color: #000;
+        }
+
+        /* Card styles */
+        .bg-base {
+            background: var(--color-base) !important;
+        }
+
+        .rounded-4 {
+            border-radius: 15px !important;
+        }
+
+        .shadow-effect {
+            box-shadow: 0 5px 30px rgba(0, 0, 0, 0.5);
+        }
+
+        .service {
+            transition: all 0.3s ease;
+        }
+
+        .service:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 10px 40px rgba(0, 212, 255, 0.2);
+        }
+
+        .iconbox {
+            background: var(--color-brand);
+            width: 60px;
+            height: 60px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2rem;
+            color: #000;
+        }
+
+        /* Project cards */
+        .card-custom-small {
+            height: 100%;
+            transition: transform 0.3s ease;
+            overflow: hidden;
+        }
+        
+        .card-custom-small:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 10px 40px rgba(0, 212, 255, 0.3);
+        }
+        
+        .card-custom-image {
+            height: 200px;
+            overflow: hidden;
+        }
+        
+        .card-custom-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.3s ease;
+        }
+
+        .card-custom-small:hover .card-custom-image img {
+            transform: scale(1.1);
+        }
+        
+        .card-custom-content {
+            padding: 1.5rem;
+        }
+        
+        .card-custom-content h4 {
+            font-size: 1.1rem;
+            margin-bottom: 0.5rem;
+            color: var(--color-brand);
+        }
+        
+        .card-custom-content p {
+            font-size: 0.9rem;
+            line-height: 1.5;
+            color: rgba(255, 255, 255, 0.7);
+        }
+
+        /* Project Section Tabs */
+        .project-tabs {
+            display: flex;
+            gap: 1rem;
+            margin-bottom: 3rem;
+            flex-wrap: wrap;
+        }
+
+        .project-tab {
+            padding: 0.75rem 1.5rem;
+            background: var(--color-base);
+            border: 2px solid transparent;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-weight: 600;
+        }
+
+        .project-tab:hover {
+            border-color: var(--color-brand);
+            transform: translateY(-2px);
+        }
+
+        .project-tab.active {
+            background: var(--color-brand);
+            color: #000;
+        }
+
+        .project-content {
+            display: none;
+        }
+
+        .project-content.active {
+            display: block;
+            animation: fadeIn 0.5s ease-in-out;
+        }
+
+        /* NLP Challenge styles */
+        .challenge-counter {
+            display: inline-block;
+            background: var(--color-brand);
+            color: #000;
+            padding: 0.75rem 1.5rem;
+            border-radius: 8px;
+            font-weight: bold;
+            margin: 1rem 0;
+        }
+        
+        .paper-card {
+            background: var(--color-base);
+            border-radius: 12px;
+            padding: 1.5rem;
+            margin-bottom: 1rem;
+            border-left: 4px solid var(--color-brand);
+            transition: all 0.3s ease;
+        }
+        
+        .paper-card:hover {
+            transform: translateX(10px);
+            box-shadow: 0 5px 30px rgba(0, 212, 255, 0.2);
+        }
+        
+        .paper-number {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            background: var(--color-brand);
+            color: #000;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            font-weight: bold;
+            margin-right: 1rem;
+            flex-shrink: 0;
+        }
+
+        .coming-soon-badge {
+            font-size: 0.65rem;
+            padding: 0.2rem 0.5rem;
+            background: var(--color-brand);
+            color: #000;
+            border-radius: 4px;
+            font-weight: 600;
+        }
+
+        .link-custom {
+            color: var(--color-brand);
+            text-decoration: none;
+            transition: all 0.3s ease;
+        }
+
+        .link-custom:hover {
+            color: #00b8e6;
+            text-decoration: underline;
+        }
+
+        a {
+            text-decoration: none;
+            color: inherit;
+        }
+
+        /* Proficiencies in Home */
+        .home-proficiencies {
+            margin-top: 5rem;
+        }
+
+        @media (max-width: 768px) {
+            .page-section {
+                padding-top: 80px;
+            }
+
+            .project-tabs {
+                justify-content: center;
+            }
+        }
+    </style>
 </head>
 
-<body data-bs-spy="scroll" data-bs-target=".navbar">
+<body>
 
-    <!-- NAVBAR -->
-    <nav class="navbar navbar-expand-lg navbar-dark fixed-top">
-        <div class="container flex-lg-column">
-            <a class="navbar-brand mx-lg-auto mb-lg-4" href="/">
-                <span class="h3 fw-bold d-block d-lg-none">Oyebamiji Micheal</span>
-                <img src="./assets/images/person.jpg" class="d-none d-lg-block rounded-circle" alt="">
+    <!-- HORIZONTAL NAVBAR -->
+    <nav class="navbar navbar-expand-lg navbar-dark fixed-top navbar-horizontal">
+        <div class="container">
+            <a class="navbar-brand d-flex align-items-center" href="#" onclick="showPage('home')">
+                <img src="./assets/images/my-picture-2.jpg" class="rounded-circle me-2" alt="Oyebamiji Micheal">
+                <span class="fw-bold">Oyebamiji Micheal</span>
             </a>
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
-                aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
                 <span class="navbar-toggler-icon"></span>
             </button>
             <div class="collapse navbar-collapse" id="navbarNav">
-                <ul class="navbar-nav ms-auto flex-lg-column text-lg-center">
-
+                <ul class="navbar-nav ms-auto">
                     <li class="nav-item">
-                        <a class="nav-link" href="#home">Home</a>
+                        <a class="nav-link active" onclick="showPage('home')">Home</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="#proficiencies">Proficiencies</a>
+                        <a class="nav-link" onclick="showPage('projects')">Projects</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="#ml">Machine Learning</a>
+                        <a class="nav-link" onclick="showPage('nlp-challenge')">100 NLP Papers</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="#dl">Deep Learning</a>
+                        <a class="nav-link" onclick="showPage('publications')">
+                            Publications <span class="coming-soon-badge">Coming Soon</span>
+                        </a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="#analysis">Data Analysis</a>
+                        <a class="nav-link" onclick="showPage('contact')">Contact</a>
                     </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="#contact">Contact</a>
-                    </li>
-
                 </ul>
             </div>
         </div>
     </nav>
-    <!-- //NAVBAR -->
 
-    <!-- CONTENT WRAPPER -->
-    <div id="content-wrapper">
-
-        <!-- HOME -->
-        <section id="home" class="full-height px-lg-5">
-            
-            <div class="container">
-                <img src="./assets/images/person.jpg" id="pic" class="d-lg-none d-lg-block rounded-circle" alt="" style="width: 180px !important; height: 180px !important;">
-            </div>
-            <div class="container">
-                <div class="row">
-                    <div class="col-lg-10">
-                        <h1 class="display-4 fw-bold"><span class="text-brand">MACHINE LEARNING ENGINEER</span></h1>
-                        <p align="justify" class="mt-2 mb-4">Skilled Machine Learning Engineer with 3+ years of experience in designing and deploying AI solutions. Proficient in computer vision, natural language processing, model optimization, adversarial networks, and large language models. Strong analytical and problem-solving skills, with a passion for leveraging cutting-edge advancements in artificial intelligence to tackle complex challenges and deliver impactful solutions.</p>
-                        <p align="justify" class="mt-2 mb-4">The purpose of this portfolio is not to provide an exhaustive list of frameworks and tools I have utilized, but rather to showcase a curated selection of projects I have completed. For everyone interested in a comprehensive catalogue of all my previous projects or tools, kindly visit my <a href="https://github.com/Oyebamiji-Micheal" target="_blank" class="link-custom">GitHub</a>.</p>
-                        <div>
-                            <a href="#ml" class="btn btn-brand me-3">Explore Projects</a> <br class="break" style="display:none;">
-                            <a href="#" class="link-custom">Whatsapp: (234) 701 911 3012</a>
-                        </div>
+    <!-- HOME PAGE -->
+    <section id="home" class="page-section active">
+        <div class="container">
+            <!-- Hero Section -->
+            <div class="row align-items-center mb-5">
+                <div class="col-lg-8">
+                    <h1 class="display-4 fw-bold">
+                        <span class="text-brand">MACHINE LEARNING ENGINEER</span>
+                    </h1>
+                    <p class="mt-4 mb-4" style="text-align: justify;">
+                        Skilled Machine Learning Engineer with 3+ years of experience in designing and deploying AI solutions. Proficient in computer vision, natural language processing, model optimization, adversarial networks, and large language models. Strong analytical and problem-solving skills, with a passion for leveraging cutting-edge advancements in artificial intelligence to tackle complex challenges and deliver impactful solutions.
+                    </p>
+                    <p class="mt-2 mb-4" style="text-align: justify;">
+                        The purpose of this portfolio is not to provide an exhaustive list of frameworks and tools I have utilized, but rather to showcase a curated selection of projects I have completed. For everyone interested in a comprehensive catalogue of all my previous projects or tools, kindly visit my <a href="https://github.com/Oyebamiji-Micheal" target="_blank" class="link-custom">GitHub</a>.
+                    </p>
+                    <div class="mt-4">
+                        <a href="#" onclick="showPage('projects')" class="btn btn-brand me-3">Explore Projects</a>
+                        <a href="#" onclick="showPage('nlp-challenge')" class="btn btn-outline-light">100 NLP Papers Challenge</a>
                     </div>
+                    <div class="mt-4">
+                        <a href="https://wa.me/2347019113012" target="_blank" class="link-custom">
+                            <i class="lab la-whatsapp"></i> WhatsApp: (234) 701 911 3012
+                        </a>
+                    </div>
+                </div>
+                <div class="col-lg-4 d-none d-lg-block text-center">
+                    <img src="./assets/images/my-picture-2.jpg" class="rounded-circle shadow-effect" alt="Oyebamiji Micheal" style="width: 280px; height: 280px; object-fit: cover; border: 3px solid var(--color-brand);">
                 </div>
             </div>
 
-        </section>
-        <!-- //HOME -->
-
-        <!-- PROFICIENCIES -->
-        <section id="proficiencies" class="full-height px-lg-5">
-            <div class="container">
-
+            <!-- Proficiencies Section within Home -->
+            <div class="home-proficiencies">
                 <div class="row pb-4">
                     <div class="col-lg-8">
                         <h6 class="text-brand">Proficiencies</h6>
@@ -97,7 +400,9 @@
                                 <i class="las la-pencil-ruler"></i>
                             </div>
                             <h5 class="mt-4 mb-2">Machine Learning</h5>
-                            <p align="justify">My experience spans the entire end-to-end ml lifecycle, from understanding the problem domain, data gathering and cleaning, to model development, training, tuning, and deployment.</p>
+                            <p style="text-align: justify;">
+                                My experience spans the entire end-to-end ML lifecycle, from understanding the problem domain, data gathering and cleaning, to model development, training, tuning, and deployment.
+                            </p>
                         </div>
                     </div>
 
@@ -107,338 +412,504 @@
                                 <i class="las la-laptop-code"></i>
                             </div>
                             <h5 class="mt-4 mb-2">Deep Learning</h5>
-                            <p align="justify">Broad understanding of various aspects of deep learning, including convolutional and recurrent neural networks, generative ai, transfer learning, natural language processing, and more.</p>
+                            <p style="text-align: justify;">
+                                Broad understanding of various aspects of deep learning, including convolutional and recurrent neural networks, generative AI, transfer learning, natural language processing, and more.
+                            </p>
                         </div>
                     </div>
 
                     <div class="col-md-4">
                         <div class="service p-4 bg-base rounded-4 shadow-effect">
                             <div class="iconbox rounded-4">
-                                <i class="las la-feather"></i>
+                                <i class="las la-chart-bar"></i>
                             </div>
                             <h5 class="mt-4 mb-2">Data Analysis</h5>
-                            <p align="justify">I specialize in extracting insights from complex data sets, utilizing statistical techniques and algorithms to analyze trends, make predictions, and inform decision-making processes.</p>
+                            <p style="text-align: justify;">
+                                I specialize in extracting insights from complex data sets, utilizing statistical techniques and algorithms to analyze trends, make predictions, and inform decision-making processes.
+                            </p>
                         </div>
                     </div>
-
                 </div>
-
             </div>
-        </section>
-        <!-- PROFICIENCIES -->
+        </div>
+    </section>
 
-        <!-- MACHINE LEARNING -->
-        <section id="ml" class="full-height px-lg-5">
-            <div class="container">
-
-                <div class="row pb-4">
-                    <div class="col-lg-8">
-                        <h6 class="text-brand">Machine Learning</h6>
-                        <h3>My Recent Projects</h3>
-                    </div>
+    <!-- PROJECTS PAGE -->
+    <section id="projects" class="page-section">
+        <div class="container">
+            <div class="row pb-4">
+                <div class="col-lg-8">
+                    <h6 class="text-brand">Portfolio</h6>
+                    <h1>My Projects</h1>
+                    <p class="lead">Explore my work across Machine Learning, Deep Learning, and Data Analysis</p>
                 </div>
+            </div>
 
+            <!-- Project Tabs -->
+            <div class="project-tabs">
+                <div class="project-tab active" onclick="showProjectTab('ml')">
+                    <i class="las la-brain"></i> Machine Learning
+                </div>
+                <div class="project-tab" onclick="showProjectTab('dl')">
+                    <i class="las la-network-wired"></i> Deep Learning
+                </div>
+                <div class="project-tab" onclick="showProjectTab('analysis')">
+                    <i class="las la-chart-line"></i> Data Analysis
+                </div>
+            </div>
+
+            <!-- Machine Learning Projects -->
+            <div id="ml-projects" class="project-content active">
                 <div class="row gy-4">
-
-                    <div class="col-xl-4 col-md-6 col-sm-12">
+                    <div class="col-lg-3 col-md-6">
                         <a href="https://github.com/Oyebamiji-Micheal/End-to-End-Customer-Churn-Prediction-using-MLflow-and-DVC/tree/main" target="_blank">
-                            <div class="card-custom rounded-4 bg-base shadow-effect">
-                                <div class="card-custom-image rounded-4">
-                                    <img class="rounded-4" src="./assets/images/ml-project-7.jpg" alt="">
+                            <div class="card-custom-small rounded-4 bg-base shadow-effect">
+                                <div class="card-custom-image">
+                                    <img src="./assets/images/ml-project-7.jpg" alt="Customer Churn">
                                 </div>
-                                <div class="card-custom-content p-4">
-                                    <h4 class="project-title">End to End Customer Churn Prediction using MLflow and DVC</h4>
-                                    <p align="justify">Identifying customers who are likely to churn, allowing businesses to take proactive measures to retain them</p>
+                                <div class="card-custom-content">
+                                    <h4>End to End Customer Churn Prediction</h4>
+                                    <p>Using MLflow and DVC to predict customer churn</p>
                                 </div>
                             </div>
                         </a>
                     </div>
-                    <div class="col-xl-4 col-md-6 col-sm-12">
+
+                    <div class="col-lg-3 col-md-6">
                         <a href="https://github.com/Oyebamiji-Micheal/Prediction-of-Mohs-Hardness" target="_blank">
-                            <div class="card-custom rounded-4 bg-base shadow-effect">
-                                <div class="card-custom-image rounded-4">
-                                    <img class="rounded-4" src="./assets/images/ml-project-1.png" alt="">
+                            <div class="card-custom-small rounded-4 bg-base shadow-effect">
+                                <div class="card-custom-image">
+                                    <img src="./assets/images/ml-project-1.png" alt="Mohs Hardness">
                                 </div>
-                                <div class="card-custom-content p-4">
-                                    <h4 class="project-title">Mohs Hardness Prediction</h4>
-                                    <p align="justify">A comprehensive showcase of end-to-end machine learning that seamlessly integrates various real-world components including data ingestion, validation, data cleaning and transformation pipeline</p>
+                                <div class="card-custom-content">
+                                    <h4>Mohs Hardness Prediction</h4>
+                                    <p>End-to-end ML pipeline with data validation</p>
                                 </div>
                             </div>
                         </a>
                     </div>
-                    <div class="col-xl-4 col-md-6 col-sm-12">
+
+                    <div class="col-lg-3 col-md-6">
                         <a href="https://github.com/Oyebamiji-Micheal/Estimating-the-Yield-of-Digital-Green-Crop" target="_blank">
-                            <div class="card-custom rounded-4 bg-base shadow-effect">
-                                <div class="card-custom-image rounded-4">
-                                    <img class="rounded-4" src="./assets/images/ml-project-2.jpg" alt="">
+                            <div class="card-custom-small rounded-4 bg-base shadow-effect">
+                                <div class="card-custom-image">
+                                    <img src="./assets/images/ml-project-2.jpg" alt="Crop Yield">
                                 </div>
-                                <div class="card-custom-content p-4">
-                                    <h4>Estimating the Yield of Digital Green Crop</h4>
-                                    <p>Estimating the crop yield for farms in India with a focus on Bayesian Optimization</p><br>
+                                <div class="card-custom-content">
+                                    <h4>Digital Green Crop Yield</h4>
+                                    <p>Estimating crop yield with Bayesian Optimization</p>
                                 </div>
                             </div>
                         </a>
                     </div>
-                    <div class="col-xl-4 col-md-6 col-sm-12">
+
+                    <div class="col-lg-3 col-md-6">
                         <a href="https://github.com/Oyebamiji-Micheal/Employee-Status-Prediction-Web-App" target="_blank">
-                            <div class="card-custom rounded-4 bg-base shadow-effect">
-                                <div class="card-custom-image rounded-4">
-                                    <img class="rounded-4" src="./assets/images/ml-project-3.jpg" alt="">
+                            <div class="card-custom-small rounded-4 bg-base shadow-effect">
+                                <div class="card-custom-image">
+                                    <img src="./assets/images/ml-project-3.jpg" alt="Employee Status">
                                 </div>
-                                <div class="card-custom-content p-4">
-                                    <h4>Employee Status Prediction (Web App)</h4>
-                                    <p>Navigating the complexities of a highly imbalanced dataset by predicting whether an employee will be promoted or not</p><br>
+                                <div class="card-custom-content">
+                                    <h4>Employee Status Prediction</h4>
+                                    <p>Handling imbalanced datasets for promotions</p>
                                 </div>
                             </div>
                         </a>
                     </div>
-                    <div class="col-xl-4 col-md-6 col-sm-12">
+
+                     <div class="col-lg-3 col-md-6">
+                        <a href="https://github.com/Oyebamiji-Micheal/Detection-of-Social-Bots-using-Machine-Learning" target="_blank">
+                            <div class="card-custom-small rounded-4 bg-base shadow-effect">
+                                <div class="card-custom-image">
+                                    <img src="./assets/images/ml-project-4.jpg" alt="Bots Detection">
+                                </div>
+                                <div class="card-custom-content">
+                                    <h4>Social Bots Detection ML</h4>
+                                    <p>Identifying social bots with ensemble learning</p>
+                                </div>
+                            </div>
+                        </a>
+                    </div>
+
+                    <div class="col-lg-3 col-md-6">
                         <a href="https://github.com/Oyebamiji-Micheal/Bulldozers-Sale-Price-Prediction" target="_blank">
-                            <div class="card-custom rounded-4 bg-base shadow-effect">
-                                <div class="card-custom-image rounded-4">
-                                    <img class="rounded-4" src="./assets/images/ml-project-5.jpg" alt="">
+                            <div class="card-custom-small rounded-4 bg-base shadow-effect">
+                                <div class="card-custom-image">
+                                    <img src="./assets/images/ml-project-5.jpg" alt="Bulldozers">
                                 </div>
-                                <div class="card-custom-content p-4">
-                                    <h4>Bulldozers Sale Price Prediction (Web App)</h4>
-                                    <p>A robust predictive model that excels in estimating the sale prices of bulldozers in the heavy equipment industry</p><br>
+                                <div class="card-custom-content">
+                                    <h4>Bulldozers Sale Price</h4>
+                                    <p>Predictive modeling for heavy equipment pricing</p>
                                 </div>
                             </div>
                         </a>
                     </div>
-                    <div class="col-xl-4 col-md-6 col-sm-12">
+
+                    <div class="col-lg-3 col-md-6">
                         <a href="https://github.com/Oyebamiji-Micheal/Asteriod-Diameter-Prediction" target="_blank">
-                            <div class="card-custom rounded-4 bg-base shadow-effect">
-                                <div class="card-custom-image rounded-4">
-                                    <img class="rounded-4" src="./assets/images/ml-project-6.jpg" alt="">
+                            <div class="card-custom-small rounded-4 bg-base shadow-effect">
+                                <div class="card-custom-image">
+                                    <img src="./assets/images/ml-project-6.jpg" alt="Asteroid">
                                 </div>
-                                <div class="card-custom-content p-4">
+                                <div class="card-custom-content">
                                     <h4>Asteroid Diameter Prediction</h4>
-                                    <p>A web app which predicts the diameters of asteroids using machine learning and astronomical data</p><br>
+                                    <p>ML-powered astronomical data analysis</p>
                                 </div>
                             </div>
                         </a>
                     </div>
 
-                </div>
-
-            </div>
-        </section>
-        <!-- MACHINE LEARNING -->
-        
-        <!-- DEEP LEARNING -->
-        <section id="dl" class="full-height px-lg-5">
-            <div class="container">
-
-                <div class="row pb-4">
-                    <div class="col-lg-8">
-                        <h6 class="text-brand">Deep Learning</h6>
-                        <h3>My Recent Projects</h3>
+                    <div class="col-lg-3 col-md-6">
+                        <a href="https://github.com/Oyebamiji-Micheal/Food-Nutrition-Analysis" target="_blank">
+                            <div class="card-custom-small rounded-4 bg-base shadow-effect">
+                                <div class="card-custom-image">
+                                    <img src="./assets/images/ml-project-8.jpg" alt="Food Nutrition">
+                                </div>
+                                <div class="card-custom-content">
+                                    <h4>Food Nutrition Analysis</h4>
+                                    <p>Nutritional content prediction using ML</p>
+                                </div>
+                            </div>
+                        </a>
                     </div>
                 </div>
+            </div>
 
+            <!-- Deep Learning Projects -->
+            <div id="dl-projects" class="project-content">
                 <div class="row gy-4">
-
-                    <div class="col-xl-4 col-md-6 col-sm-12">
+                    <div class="col-lg-3 col-md-6">
                         <a href="https://github.com/Oyebamiji-Micheal/Facial-Reconstruction-using-Conditional-Generative-Adversarial-Network" target="_blank">
-                            <div class="card-custom rounded-4 bg-base shadow-effect">
-                                <div class="card-custom-image rounded-4" id="little-transform">
-                                    <img class="rounded-4" src="./assets/images/dl-project-1.jpg" alt="">
+                            <div class="card-custom-small rounded-4 bg-base shadow-effect">
+                                <div class="card-custom-image">
+                                    <img src="./assets/images/dl-project-1.jpg" alt="Facial Reconstruction">
                                 </div>
-                                <div class="card-custom-content p-4">
-                                    <h4 class="project-title">Facial Reconstruction using CGAN</h4>
-                                    <p align="justify">Reconstructing occluded facial images of celebrities using conditional generative adversarial network</p>
+                                <div class="card-custom-content">
+                                    <h4>Facial Reconstruction CGAN</h4>
+                                    <p>Reconstructing occluded faces using conditional GANs</p>
                                 </div>
                             </div>
                         </a>
                     </div>
-                    <div class="col-xl-4 col-md-6 col-sm-12">
+
+                    <div class="col-lg-3 col-md-6">
                         <a href="https://github.com/Oyebamiji-Micheal/Dental-Open-Bite-Detection" target="_blank">
-                            <div class="card-custom rounded-4 bg-base shadow-effect">
-                                <div class="card-custom-image rounded-4">
-                                    <img class="rounded-4" src="./assets/images/dl-project-2.jpg" alt="">
+                            <div class="card-custom-small rounded-4 bg-base shadow-effect">
+                                <div class="card-custom-image">
+                                    <img src="./assets/images/dl-project-2.jpg" alt="Dental Detection">
                                 </div>
-                                <div class="card-custom-content p-4">
+                                <div class="card-custom-content">
                                     <h4>Dental Open Bite Detection</h4>
-                                    <p align="justify">Automatically detecting the presence of dental open bite using traditional convolutional neural network (CNN) and transfer learning</p><br>
+                                    <p>CNN and transfer learning for dental diagnostics</p>
                                 </div>
                             </div>
                         </a>
                     </div>
-                    <div class="col-xl-4 col-md-6 col-sm-12">
+
+                    <div class="col-lg-3 col-md-6">
                         <a href="https://github.com/Oyebamiji-Micheal/Tomato-Disease-Detection-using-Convolutional-Neural-Networks-and-Explainable-AI" target="_blank">
-                            <div class="card-custom rounded-4 bg-base shadow-effect">
-                                <div class="card-custom-image rounded-4">
-                                    <img class="rounded-4" src="./assets/images/dl-project-3.jpg" alt="">
+                            <div class="card-custom-small rounded-4 bg-base shadow-effect">
+                                <div class="card-custom-image">
+                                    <img src="./assets/images/dl-project-3.jpg" alt="Tomato Disease">
                                 </div>
-                                <div class="card-custom-content p-4">
-                                    <h4>Tomato Disease Detection using Convolutional Neural Networks and Explainable AI</h4>
-                                    <p align="justify">Integrating Local Interpretable Model-agnostic Explanations (LIME) with CNN-based classifiers for an explainable detection of tomato diseases</p><br>
+                                <div class="card-custom-content">
+                                    <h4>Tomato Disease Detection</h4>
+                                    <p>Explainable AI with LIME for disease classification</p>
                                 </div>
                             </div>
                         </a>
                     </div>
-                    <div class="col-xl-4 col-md-6 col-sm-12">
+
+                    <div class="col-lg-3 col-md-6">
                         <a href="https://github.com/Oyebamiji-Micheal/English-to-Yoruba-Translation-using-RNN" target="_blank">
-                            <div class="card-custom rounded-4 bg-base shadow-effect">
-                                <div class="card-custom-image rounded-4">
-                                    <img class="rounded-4" src="./assets/images/dl-project-4.jpg" alt="">
+                            <div class="card-custom-small rounded-4 bg-base shadow-effect">
+                                <div class="card-custom-image">
+                                    <img src="./assets/images/dl-project-4.jpg" alt="Translation">
                                 </div>
-                                <div class="card-custom-content p-4">
-                                    <h4>English to Yoruba Translation using RNN</h4>
-                                    <p align="justify">A beginner's approach to Sequence to Sequence modeling using Recurrent Neural Networks</p><br>
+                                <div class="card-custom-content">
+                                    <h4>English to Yoruba Translation</h4>
+                                    <p>Sequence-to-sequence modeling with RNNs</p>
                                 </div>
                             </div>
                         </a>
                     </div>
-                    <div class="col-xl-4 col-md-6 col-sm-12">
+
+                    <div class="col-lg-3 col-md-6">
                         <a href="https://github.com/Oyebamiji-Micheal/Sentiment-Analysis-of-Spotify-Songs" target="_blank">
-                            <div class="card-custom rounded-4 bg-base shadow-effect">
-                                <div class="card-custom-image rounded-4">
-                                    <img class="rounded-4" src="./assets/images/dl-project-5.jpg" alt="">
+                            <div class="card-custom-small rounded-4 bg-base shadow-effect">
+                                <div class="card-custom-image">
+                                    <img src="./assets/images/dl-project-5.jpg" alt="Spotify Sentiment">
                                 </div>
-                                <div class="card-custom-content p-4">
-                                    <h4>Sentiment Analysis of Spotify Songs</h4>
-                                    <p align="justify">Analyzing sentiment in Spotify music dataset using natural language processing techniques</p><br>
+                                <div class="card-custom-content">
+                                    <h4>Spotify Sentiment Analysis</h4>
+                                    <p>NLP techniques for music sentiment classification</p>
                                 </div>
                             </div>
                         </a>
                     </div>
-                    <div class="col-xl-4 col-md-6 col-sm-12">
+
+                    <div class="col-lg-3 col-md-6">
+                        <a href="https://github.com/Oyebamiji-Micheal/Enhanced-Search-and-Rescue-Operation-using-Faster-RCNN" target="_blank">
+                            <div class="card-custom-small rounded-4 bg-base shadow-effect">
+                                <div class="card-custom-image">
+                                    <img src="./assets/images/dl-project-6.jpg" alt="Search and Rescue">
+                                </div>
+                                <div class="card-custom-content">
+                                    <h4>Enhanced Search and Rescue using RCNN</h4>
+                                    <p>Human detection for emergency response</p>
+                                </div>
+                            </div>
+                        </a>
+                    </div>
+
+                    <div class="col-lg-3 col-md-6">
+                        <a href="https://github.com/Oyebamiji-Micheal/Analysing-User-Experience-on-E-Commerce-Apps-using-NLP" target="_blank">
+                            <div class="card-custom-small rounded-4 bg-base shadow-effect">
+                                <div class="card-custom-image">
+                                    <img src="./assets/images/dl-project-7.jpg" alt="E-Commerce Sentiment">
+                                </div>
+                                <div class="card-custom-content">
+                                    <h4>E-Commerce Sentiment Analysis</h4>
+                                    <p>Improving user experience with NLP</p> 
+                                </div>
+                            </div>
+                        </a>
+                    </div>
+
+                    <div class="col-lg-3 col-md-6">
                         <a href="https://github.com/Oyebamiji-Micheal/T-Shirt-Sleeve-Classification-using-Convolutional-Neural-Network" target="_blank">
-                            <div class="card-custom rounded-4 bg-base shadow-effect">
-                                <div class="card-custom-image rounded-4">
-                                    <img class="rounded-4" src="./assets/images/dl-project-6.jpg" alt="">
+                            <div class="card-custom-small rounded-4 bg-base shadow-effect">
+                                <div class="card-custom-image">
+                                    <img src="./assets/images/dl-project-8.jpg" alt="T-Shirt Classification">
                                 </div>
-                                <div class="card-custom-content p-4">
-                                    <h4>T Shirt Sleeve Classification using Convolutional Neural Network</h4>
-                                    <p align="justify">Classify whether a T-Shirt is long sleeve, short sleeve or sleeveless</p><br>
+                                <div class="card-custom-content">
+                                    <h4>T-Shirt Sleeve Classification</h4>
+                                    <p>CNN-based clothing attribute detection</p>
                                 </div>
                             </div>
                         </a>
                     </div>
                 </div>
             </div>
-        </section>
-        <!-- DEEP LEARNING -->
 
-        <!-- DATA ANALYSIS -->
-        <section id="analysis" class="full-height px-lg-5">
-            <div class="container">
-
-                <div class="row pb-4">
-                    <div class="col-lg-8">
-                        <h6 class="text-brand">Data Analysis</h6>
-                        <h3>My Recent Projects</h3>
-                    </div>
-                </div>
-
+            <!-- Data Analysis Projects -->
+            <div id="analysis-projects" class="project-content">
                 <div class="row gy-4">
-
-                    <div class="col-xl-4 col-md-6 col-sm-12">
-                        <a href="https://github.com/Oyebamiji-Micheal/Analysis-of-Credit-Card-Transactions" target="_blank" >
-                            <div class="card-custom rounded-4 bg-base shadow-effect">
-                                <div class="card-custom-image rounded-4">
-                                    <img class="rounded-4" src="./assets/images/analysis-project-1.jpg" alt="">
+                    <div class="col-lg-3 col-md-6">
+                        <a href="https://github.com/Oyebamiji-Micheal/Analysis-of-Credit-Card-Transactions" target="_blank">
+                            <div class="card-custom-small rounded-4 bg-base shadow-effect">
+                                <div class="card-custom-image">
+                                    <img src="./assets/images/analysis-project-1.jpg" alt="Credit Card">
                                 </div>
-                                <div class="card-custom-content p-4">
-                                    <h4>Analysis of Credit Card Transactions</h4>
-                                    <p align="justify">Exploratory Data Analysis of credit card transactions: Understanding patterns, trends, and potential factors that influence legitimate and fraudulent transactions</p>
+                                <div class="card-custom-content">
+                                    <h4>Credit Card Transactions</h4>
+                                    <p>EDA of transaction patterns and fraud detection</p>
                                 </div>
                             </div>
                         </a>
                     </div>
-                    <div class="col-xl-4 col-md-6 col-sm-12">
+
+                    <div class="col-lg-3 col-md-6">
                         <a href="https://github.com/Oyebamiji-Micheal/Exploratory-Data-Analysis-of-Cargo-Theft-Data/tree/main" target="_blank">
-                            <div class="card-custom rounded-4 bg-base shadow-effect">
-                                <div class="card-custom-image rounded-4">
-                                    <img class="rounded-4" src="./assets/images/analysis-project-2.jpg" alt="">
+                            <div class="card-custom-small rounded-4 bg-base shadow-effect">
+                                <div class="card-custom-image">
+                                    <img src="./assets/images/analysis-project-2.jpg" alt="Cargo Theft">
                                 </div>
-                                <div class="card-custom-content p-4">
-                                    <h4>Exploratory Data Analysis of Cargo Theft Data</h4>
-                                    <p>Exploratory Data Analysis of Cargo Data: Uncovering effective crime prevention strategies</p><br>
+                                <div class="card-custom-content">
+                                    <h4>Cargo Theft Data Analysis</h4>
+                                    <p>Uncovering crime prevention strategies through data</p>
                                 </div>
                             </div>
                         </a>
                     </div>
-                    <div class="col-xl-4 col-md-6 col-sm-12">
+
+                    <div class="col-lg-3 col-md-6">
                         <a href="https://github.com/Oyebamiji-Micheal/ALX-data-analyst-nanodegree-program/tree/master/Project%20three" target="_blank">
-                            <div class="card-custom rounded-4 bg-base shadow-effect">
-                                <div class="card-custom-image rounded-4">
-                                    <img class="rounded-4" src="./assets/images/analysis-project-3.jpg" alt="">
+                            <div class="card-custom-small rounded-4 bg-base shadow-effect">
+                                <div class="card-custom-image">
+                                    <img src="./assets/images/analysis-project-3.jpg" alt="FIFA Analysis">
                                 </div>
-                                <div class="card-custom-content p-4">
-                                    <h4>Exploratory Data Analysis of FIFA World Cup Data</h4>
-                                    <p align="justify">Where the passion for football runs deep, Brazil stands tall. With the highest number of FIFA World Cup victories, they don't just play the game, they define it</p><br>
+                                <div class="card-custom-content">
+                                    <h4>FIFA World Cup Analysis</h4>
+                                    <p>Exploring historical trends and team performances</p>
                                 </div>
                             </div>
                         </a>
                     </div>
-
+                </div>
             </div>
-        </section>
-        <!-- DATA ANALYSIS -->
+        </div>
+    </section>
 
-        <!-- CONTACT -->
-        <section id="contact" class="full-height px-lg-5">
-            <div class="container">
-
-                <div class="row justify-content-center text-center">
-                    <div class="col-lg-8 pb-4">
-                        <h6 class="text-brand">CONTACT</h6>
-                        <h1>Interested in working together? Let's talk
-                        </h1>
+    <!-- NLP CHALLENGE PAGE -->
+    <section id="nlp-challenge" class="page-section">
+        <div class="container">
+            <div class="row pb-4">
+                <div class="col-lg-10">
+                    <h6 class="text-brand">NLP Research Challenge</h6>
+                    <h1>100 State-of-the-Art NLP Papers Implementation</h1>
+                    <p class="lead mt-3">
+                        My journey through implementing 100 SOTA Natural Language Processing research papers. The goal is to intuitively understand and ultimately contribute to some of the most challenging concepts in AI such as memory, personalization, awareness, scalability, perception, and so on.
+                    </p>
+                    <div class="challenge-counter">
+                        Progress: 0 / 100 Papers Implemented
                     </div>
-
-                    <div class="col-lg-8">
-                        <form action="mailto:oyebamijimicheal10@gmail.com" method="post" enctype="text/plain" class="row g-lg-3 gy-3">
-                            <div class="form-group col-md-6">
-                                <input type="text" name="name" class="form-control" placeholder="Enter your name">
-                            </div>
-                            <div class="form-group col-md-6">
-                                <input type="email" name="email" class="form-control" placeholder="Enter your email">
-                            </div>
-                            <div class="form-group col-12">
-                                <input type="text" name="subject" class="form-control" placeholder="Enter subject">
-                            </div>
-                            <div class="form-group col-12">
-                                <textarea name="message" rows="4" class="form-control" placeholder="Enter your message"></textarea>
-                            </div>
-                            <div class="form-group col-12 d-grid">
-                                <button type="submit" class="btn btn-brand">Contact me</button>
-                            </div>
-                        </form>
-                    </div>
+                </div>
             </div>
-        </section>
-        <!-- //CONTACT -->
 
-        <!-- FOOTER -->
-        <footer class="py-5 px-lg-5">
-            <div class="container">
-                <div class="row gy-4 justify-content-between">
-                    <div class="col-auto">
-                        <p class="mb-0"> <a href="#" class="fw-bold"></a></p>
+            <div class="row">
+                <div class="col-12">
+                    <h4 class="mb-4">Research Areas</h4>
+                    
+                    <!-- Memory Section -->
+                    <div class="mb-5">
+                        <h5 class="text-brand mb-3">
+                            <i class="las la-brain"></i> Memory & Context
+                        </h5>
+                        <div class="row gy-3">
+                            <div class="col-lg-6">
+                                <div class="paper-card">
+                                    <div class="d-flex align-items-start">
+                                        <span class="paper-number">01</span>
+                                        <div>
+                                            <h6 class="mb-2">Paper Title Placeholder</h6>
+                                            <p class="mb-1 small"><strong>Authors:</strong> To be added</p>
+                                            <p class="mb-1 small"><strong>Year:</strong> 202X | <strong>Conference:</strong> TBD</p>
+                                            <p class="mb-2 small">Description of the paper coming soon...</p>
+                                            <a href="#" class="btn btn-sm btn-outline-light">Implementation</a>
+                                            <a href="#" class="btn btn-sm btn-outline-light ms-2">Paper</a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
                     </div>
-                    <div class="col-auto">
-                        <div class="social-icons">
-                            <a href="https://github.com/Oyebamiji-Micheal/" target="_blank"><i class="lab la-github"></i></a>
-                            <a href="https://www.linkedin.com/in/oyebamiji-micheal/" target="_blank"><i class="lab la-linkedin"></i></a>
-                            <a href="https://twitter.com/MichealOjuri" target="_blank"><i class="lab la-twitter"></i></a>
+
+                    <div class="text-center mt-5">
+                        <p class="text-muted">More papers will be added as the challenge progresses...</p>
+                        <a href="https://github.com/Oyebamiji-Micheal" target="_blank" class="btn btn-brand">
+                            View Full Challenge on GitHub
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- PUBLICATIONS PAGE -->
+    <section id="publications" class="page-section">
+        <div class="container">
+            <div class="row pb-4">
+                <div class="col-lg-8">
+                    <h6 class="text-brand">Publications</h6>
+                    <h1>Research & Publications</h1>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-lg-8 mx-auto text-center">
+                    <div class="p-5 bg-base rounded-4 shadow-effect">
+                        <i class="las la-file-alt" style="font-size: 4rem; color: var(--color-brand);"></i>
+                        <h3 class="mt-4 mb-3">Coming Soon</h3>
+                        <p class="lead">
+                            Research publications and academic contributions will be showcased here. Stay tuned for updates on my latest work in machine learning and natural language processing.
+                        </p>
+                        <a href="https://github.com/Oyebamiji-Micheal" target="_blank" class="btn btn-brand mt-3">
+                            Visit GitHub
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CONTACT PAGE -->
+    <section id="contact" class="page-section">
+        <div class="container">
+            <div class="row pb-4">
+                <div class="col-lg-8">
+                    <h6 class="text-brand">Contact</h6>
+                    <h1>Get In Touch</h1>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-lg-8 mx-auto text-center">
+                    <div class="p-5 bg-base rounded-4 shadow-effect">
+                        <h3 class="mb-4">Let's Connect</h3>
+                        <p class="lead mb-4">
+                            Interested in collaborating on a project or discussing machine learning opportunities? Feel free to reach out!
+                        </p>
+                        <div class="d-flex justify-content-center gap-3 flex-wrap">
+                            <a href="https://github.com/Oyebamiji-Micheal" target="_blank" class="btn btn-brand">
+                                <i class="lab la-github"></i> GitHub
+                            </a>
+                            <a href="https://wa.me/2347019113012" target="_blank" class="btn btn-outline-light">
+                                <i class="lab la-whatsapp"></i> WhatsApp: (234) 701 911 3012
+                            </a>
+                            <a href="mailto:oyebamijimicheal10@gmail.com?subject=Feedback%20From%20Github&body=Hello" target="_blank" class="btn btn-outline-light">
+                                <i class="las la-envelope"></i> Email
+                            </a>
                         </div>
                     </div>
                 </div>
             </div>
-        </footer>
-        <!-- //FOOTER -->
+        </div>
+    </section>
 
-    </div>
-    <!-- //CONTENT WRAPPER -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        // Show page function
+        function showPage(pageId) {
+            // Hide all pages
+            const pages = document.querySelectorAll('.page-section');
+            pages.forEach(page => {
+                page.classList.remove('active');
+            });
 
+            // Show selected page
+            const selectedPage = document.getElementById(pageId);
+            if (selectedPage) {
+                selectedPage.classList.add('active');
+                window.scrollTo({ top: 0, behavior: 'smooth' });
+            }
 
+            // Update nav links
+            const navLinks = document.querySelectorAll('.nav-link');
+            navLinks.forEach(link => {
+                link.classList.remove('active');
+            });
+            event.target.classList.add('active');
 
-    <script src="./assets/js/bootstrap.bundle.min.js"></script>
-    <script src="./assets/js/aos.js"></script>
-    <script src="./assets/js/main.js"></script>
+            // Close mobile menu if open
+            const navbarCollapse = document.querySelector('.navbar-collapse');
+            if (navbarCollapse.classList.contains('show')) {
+                const navbarToggler = document.querySelector('.navbar-toggler');
+                navbarToggler.click();
+            }
+        }
+
+        // Show project tab function
+        function showProjectTab(tabId) {
+            // Hide all project contents
+            const projectContents = document.querySelectorAll('.project-content');
+            projectContents.forEach(content => {
+                content.classList.remove('active');
+            });
+
+            // Show selected project content
+            const selectedContent = document.getElementById(tabId + '-projects');
+            if (selectedContent) {
+                selectedContent.classList.add('active');
+            }
+
+            // Update project tabs
+            const projectTabs = document.querySelectorAll('.project-tab');
+            projectTabs.forEach(tab => {
+                tab.classList.remove('active');
+            });
+            event.target.classList.add('active');
+        }
+    </script>
 </body>
-
 </html>
